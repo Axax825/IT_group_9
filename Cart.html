@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Confirm Order</title>
+  <style>
+body {
+  font-family: Arial, sans-serif;
+  font-style: italic;
+  background-color: #fff5cc;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fdfdfd;
+  font-style: italic;
+}
+
+.cart-item h3 {
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.cart-item p {
+  font-size: 1em;
+  font-style: italic;
+}
+
+button {
+  padding: 8px 16px;
+  margin: 5px;
+  background-color: #ff9800;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-style: normal;
+}
+
+#edit-button, #submit-button {
+  font-size: 1em;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  font-style: normal;
+}
+#increase-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#increase-button:hover {
+  background-color: #388E3C;
+}
+
+#reduce-button {
+  background-color: #F44336;
+  color: white;
+}
+
+#reduce-button:hover {
+  background-color: #a21919;
+}
+
+#edit-button {
+  background-color: hsl(123, 94%, 19%);
+  color: white;
+}
+
+#edit-button:hover {
+  background-color: #002704;
+}
+
+#submit-button {
+  background-color: #12a2db;
+  color: white;
+}
+
+#submit-button:hover {
+  background-color: #154669;
+}
+   </style>
+</head>
+<body>
+  <h1>Cart</h1>
+
+  <h2>Already ordered dishes</h2>
+  <div id="cart-items"></div>
+
+  <button id='edit-button' onclick="goToMenu()">Edit</button>
+  <button id='submit-button' onclick="submitOrder()">Submit Order</button>
+
+  
+
+  <script>
+    var orderItems = JSON.parse(localStorage.getItem('orderItems')) || {};
+    var totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
+    function displayOrderItems() {
+      var cartItemsElement = document.getElementById('cart-items');
+      cartItemsElement.innerHTML = '';
+
+      
+      for (var itemName in orderItems) {
+        var quantity = orderItems[itemName];
+        var price = getPriceOfItem(itemName);
+        var listItem = document.createElement('div');
+
+        listItem.innerHTML = `
+          <div class="cart-item">
+            <h3>${itemName}</h3>
+            <p>quantity: ${quantity}</p>
+            <button id='increase-button' onclick="increaseQuantity('${itemName}')">Increase</button>
+            <button id='reduce-button' onclick="decreaseQuantity('${itemName}')">Reduce</button>
+          </div>
+        `;
+        cartItemsElement.appendChild(listItem);
+      }
+    }
+
+    function increaseQuantity(itemName) {
+      var price = getPriceOfItem(itemName);
+
+      if (orderItems[itemName]) {
+        orderItems[itemName]++;
+      } else {
+        orderItems[itemName] = 1;
+      }
+      totalPrice += price;
+      displayOrderItems();
+    }
+
+    function decreaseQuantity(itemName) {
+      if (orderItems[itemName]) {
+        var price = getPriceOfItem(itemName);
+
+        orderItems[itemName]--;
+        totalPrice -= price;
+        if (orderItems[itemName] === 0) {
+          delete orderItems[itemName];
+        }
+        displayOrderItems();
+      }
+    }
+
+    function goToMenu() {
+      localStorage.setItem('orderItems', JSON.stringify(orderItems));
+      localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+      window.location.href = 'Index.html';
+    }
+
+    
+
+    function getPriceOfItem(itemName) {
+      if (itemName === 'Signature Baked Pork Chop with Fresh Tomato Rice') {
+        return 80.00;
+      } else if (itemName === 'Baked Curry Chicken with Potato Rice') {
+        return 85.50;
+      } else if (itemName === 'Stir-fried Beef Ho Fun'){
+        return 81.75;
+      } else if (itemName === 'Swiss Chicken Wing with Doll Noodle Set Meal'){
+        return 70.50;
+      } else if (itemName === 'Crispy Fried Chicken Thigh with French Fries'){
+        return 52.00;
+      } else if (itemName === 'Pan-fried Onion Pork Chop with Ham'){
+        return 79.00;
+      } else if (itemName === 'Baked Seafood Rice with Cheese'){
+        return 83.00;
+      } else if (itemName === 'Curry Beef Brisket Rice'){
+        return 71.00;
+      } else if (itemName === 'Indonesian Fried Rice'){
+        return 81.00;
+      } else if (itemName === 'Black Pepper Beef Stir-fried Spaghetti'){
+        return 79.00;
+      } else if (itemName === 'Spinach Juice Baked Fish Fillet Rice'){
+        return 80.00;
+      } else if (itemName === 'Smoked Salmon Caesar Salad'){
+        return 82.00;
+      } else if (itemName === 'Milk Tea'){
+        return 20.00;
+      } else if (itemName === 'Coffee'){
+        return 20.00;
+      } else if (itemName === 'Chocolate'){
+        return 20.00;
+      } else if (itemName === 'Lemon Tea'){
+        return 20.00;
+      } else if (itemName === 'Lemonade'){
+        return 20.00;
+      } else if (itemName === 'Whispering Jade'){
+        return 45.00;
+      } else if (itemName === 'Colourful Tropics'){
+        return 40.00;
+      } else if (itemName === 'God Father'){
+        return 168.00;
+      } else if (itemName === 'Rainbow'){
+        return 168.00;
+      } else {
+        return 0;
+      }
+    }
+
+    function submitOrder() {
+      localStorage.setItem('orderItems', JSON.stringify(orderItems));
+      localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+      window.alert("Order successful, please wait patiently")
+      window.location.href = 'Bill.html';
+    }
+    
+    displayOrderItems();
+  </script>
+</body>
+</html>

@@ -1,0 +1,626 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+  <title>ordering system</title>
+  <style> 
+
+body {
+  background-color: #fff5cc;
+  font-family: Arial, sans-serif;
+}
+
+.menu-item { 
+  display: flex; 
+  align-items: center; 
+  background-color: #ffffff;
+  margin: 10px 10px;
+  padding: 15px; 
+  width: calc(45% - 20px);
+  border: 1px solid #ddd; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.menu-item img {
+  width: 180px; 
+  height: 130px; 
+  margin-right: 20px; 
+  border: 1px solid #eee; 
+  border-radius: 6px; 
+}
+
+.menu-item h3 {
+  color: #333;
+  font-size: 1.3em;
+  margin-bottom: 5px; 
+  font-weight: bold;
+}
+
+.menu-item p {
+  line-height: 1.6;
+  margin-bottom: 5px; 
+  font-size: 1em;
+}
+
+.menu-item button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  display: block; 
+  width: 100%; 
+  margin-top: 5px; 
+  box-sizing: border-box; 
+}
+
+.menu-item button:nth-child(1) {
+  background: linear-gradient(to right, #56ab2f, #a8e063);
+  color: white;
+  margin-bottom: 5px; 
+}
+
+.menu-item button:nth-child(2) {
+  background: linear-gradient(to right, #f44336, #ff8177);
+  color: white;
+}
+
+.menu-item button:hover {
+  opacity: 0.8;
+}
+
+.menu-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+#cart {
+  margin-top: 20px;
+}
+
+h1, h2 {
+  font-style: italic;
+}
+
+.page-title, .menu-title {
+  font-style: italic;
+}
+#cart p {
+  font-size: 1.5em;
+  font-style: italic;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#next-button {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background: #56ab2f;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
+}
+
+#next-button:hover {
+  background: #347318;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #cart {
+      margin-top: 20px;
+    }
+    h1, h2 {
+  font-style: italic;
+}
+
+.cart-item h3 {
+  margin-top: 0;
+}
+
+.cart-item p {
+  margin-bottom: 0;
+}
+
+
+.page-title, .menu-title {
+  font-style: italic;
+}
+
+    
+  </style>
+<body>
+  <h1>Ordering Page</h1>
+
+  <h2>Menu</h2>
+  <div id="menu">
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p1.jpg" alt="Signature Baked Pork Chop with Fresh Tomato Rice ">
+        <div>
+          <h3>Signature Baked Pork Chop with Fresh Tomato Rice</h3>
+          <p>price：$80.00</p>
+          <button onclick="adding('Signature Baked Pork Chop with Fresh Tomato Rice')">Add to Cart</button>
+          <button onclick="removing('Signature Baked Pork Chop with Fresh Tomato Rice')">Remove from cart</button>
+          <span id="item-quantity-Signature Baked Pork Chop with Fresh Tomato Rice">0</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p2.jpg" alt="Baked Curry Chicken with Potato Rice">
+        <div>
+          <h3>Baked Curry Chicken with Potato Rice </h3>
+          <p>price：$85.50</p>
+          <button onclick="adding('Baked Curry Chicken with Potato Rice')">Add to Cart</button>
+          <button onclick="removing('Baked Curry Chicken with Potato Rice')">Remove from cart</button>
+          <span id="item-quantity-Baked Curry Chicken with Potato Rice">0</span>
+
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p3.jpg" alt="Stir-fried Beef Ho Fun">
+        <div>
+          <h3>Stir-fried Beef Ho Fun</h3>
+          <p>price：$81.75</p>    
+          <button onclick="adding('Stir-fried Beef Ho Fun')">Add to Cart</button>
+          <button onclick="removing('Stir-fried Beef Ho Fun')">Remove from cart</button>
+          <span id="item-quantity-Stir-fried Beef Ho Fun">0</span>
+        </div>
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p4.jpg" alt="Swiss Chicken Wing with Doll Noodle Set Meal">
+        <div>
+          <h3>Swiss Chicken Wing with Doll Noodle Set Meal</h3>
+          <p>price：$70.50</p>
+          <button onclick="adding('Swiss Chicken Wing with Doll Noodle Set Meal')">Add to Cart</button>
+          <button onclick="removing('Swiss Chicken Wing with Doll Noodle Set Meal')">Remove from cart</button>
+          <span id="item-quantity-Swiss Chicken Wing with Doll Noodle Set Meal">0</span>
+
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p5.jpg" alt="Crispy Fried Chicken Thigh with French Fries">
+        <div>
+          <h3>Crispy Fried Chicken Thigh with French Fries</h3>
+          <p>price：$52.00</p>
+          <button onclick="adding('Crispy Fried Chicken Thigh with French Fries')">Add to Cart</button>
+          <button onclick="removing('Crispy Fried Chicken Thigh with French Fries')">Remove from cart</button>
+          <span id="item-quantity-Crispy Fried Chicken Thigh with French Fries">0</span>
+
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p6.jpg" alt="Pan-fried Onion Pork Chop with Ham">
+        <div>
+          <h3>Pan-fried Onion Pork Chop with Ham</h3>
+          <p>price：$79.00</p>
+          <button onclick="adding('Pan-fried Onion Pork Chop with Ham')">Add to Cart</button>
+          <button onclick="removing('Pan-fried Onion Pork Chop with Ham')">Remove from cart</button>
+          <span id="item-quantity-Pan-fried Onion Pork Chop with Ham">0</span>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p7.jpg" alt="Baked Seafood Rice with Cheese">
+        <div>
+          <h3>Baked Seafood Rice with Cheese</h3>
+          <p>price：$83.00</p>
+          <button onclick="adding('Baked Seafood Rice with Cheese')">Add to Cart</button>
+          <button onclick="removing('Baked Seafood Rice with Cheese')">Remove from cart</button>
+          <span id="item-quantity-Baked Seafood Rice with Cheese">0</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p8.jpg" alt="Curry Beef Brisket Rice">
+        <div>
+          <h3>Curry Beef Brisket Rice</h3>
+          <p>price：$71.00</p>
+          <button onclick="adding('Curry Beef Brisket Rice')">Add to Cart</button>
+          <button onclick="removing('Curry Beef Brisket Rice')">Remove from cart</button>
+          <span id="item-quantity-Curry Beef Brisket Rice">0</span>
+        </div>
+      </div>
+
+      <div class="menu-item">
+        <img src="p9.jpg" alt="Indonesian Fried Rice">
+        <div>
+          <h3>Indonesian Fried Rice</h3>
+          <p>price：$81.00</p>
+          <button onclick="adding('Indonesian Fried Rice')">Add to Cart</button>
+          <button onclick="removing('Indonesian Fried Rice')">Remove from cart</button>
+          <span id="item-quantity-Indonesian Fried Rice">0</span>
+
+        </div>
+      </div>
+    </div>  
+
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p10.jpg" alt="Black Pepper Beef Stir-fried Spaghetti">
+        <div>
+          <h3>Black Pepper Beef Stir-fried Spaghetti</h3>
+          <p>price：$79.00</p>
+          <button onclick="adding('Black Pepper Beef Stir-fried Spaghetti')">Add to Cart</button>  
+          <button onclick="removing('Black Pepper Beef Stir-fried Spaghetti')">Remove from cart</button>
+          <span id="item-quantity-Black Pepper Beef Stir-fried Spaghetti">0</span>
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p11.jpg" alt="Spinach Juice Baked Fish Fillet Rice">
+        <div>
+          <h3>Spinach Juice Baked Fish Fillet Rice</h3>
+          <p>price：$80.00</p>
+          <button onclick="adding('Spinach Juice Baked Fish Fillet Rice')">Add to Cart</button>
+          <button onclick="removing('Spinach Juice Baked Fish Fillet Rice')">Remove from cart</button>
+          <span id="item-quantity-Spinach Juice Baked Fish Fillet Rice">0</span>
+
+                    
+
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p12.jpg" alt="Smoked Salmon Caesar Salad">
+        <div>
+          <h3>Smoked Salmon Caesar Salad</h3>
+          <p>price：$82.00</p>
+          <button onclick="adding('Smoked Salmon Caesar Salad')">Add to Cart</button>
+          <button onclick="removing('Smoked Salmon Caesar Salad')">Remove from cart</button>
+          <span id="item-quantity-Smoked Salmon Caesar Salad">0</span>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p13.jpg" alt="Milk Tea">
+        <div>
+          <h3>Milk Tea</h3>
+          <p>price：$20.00</p>
+          <button onclick="adding('Milk Tea')">Add to Cart</button>  
+          <button onclick="removing('Milk Tea')">Remove from cart</button>
+          <span id="item-quantity-Milk Tea">0</span>
+        
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p14.jpg" alt="Coffee">
+        <div>
+          <h3>Coffee</h3>
+          <p>price：$20.00</p>
+          <button onclick="adding('Coffee')">Add to Cart</button>
+          <button onclick="removing('Coffee')">Remove from cart</button>
+          <span id="item-quantity-Coffee">0</span>
+
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p15.jpg" alt="Chocolate">
+        <div>
+          <h3>Chocolate</h3>
+          <p>price：$20.00</p>
+          <button onclick="adding('Chocolate')">Add to Cart</button>
+          <button onclick="removing('Chocolate')">Remove from cart</button>
+          <span id="item-quantity-Chocolate">0</span>
+          
+        </div>
+        
+      </div>
+    </div>
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p16.jpg" alt="Lemon Tea">
+        <div>
+          <h3>Lemon Tea</h3>
+          <p>price：$20.00</p>
+          <button onclick="adding('Lemon Tea')">Add to Cart</button>  
+          <button onclick="removing('Lemon Tea')">Remove from cart</button>
+          <span id="item-quantity-Lemon Tea">0</span>
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p17.jpg" alt="Lemonade">
+        <div>
+          <h3>Lemonade</h3>
+          <p>price：$20.00</p>
+          <button onclick="adding('Lemonade')">Add to Cart</button>
+          <button onclick="removing('Lemonade')">Remove from cart</button>
+          <span id="item-quantity-Lemonade">0</span>
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p18.jpg" alt="Whispering Jade">
+        <div>
+          <h3>Whispering Jade</h3>
+          <p>price：$45.00</p>
+          <button onclick="adding('Whispering Jade')">Add to Cart</button>
+          <button onclick="removing('Whispering Jade')">Remove from cart</button>
+          <span id="item-quantity-Whispering Jade">0</span>
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-row">
+      <div class="menu-item">
+        <img src="p19.jpg" alt="Colourful Tropics">
+        <div>
+          <h3>Colourful Tropics</h3>
+          <p>price：$40.00</p>
+          <button onclick="adding('Colourful Tropics')">Add to Cart</button>  
+          <button onclick="removing('Colourful Tropics')">Remove from cart</button>
+          <span id="item-quantity-Colourful Tropics">0</span>
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p20.jpg" alt="God Father">
+        <div>
+          <h3>God Father</h3>
+          <p>price：$168.00</p>
+          <button onclick="adding('God Father')">Add to Cart</button>
+          <button onclick="removing('God Father')">Remove from cart</button>
+          <span id="item-quantity-God Father">0</span>
+
+        </div>
+      </div>
+  
+      <div class="menu-item">
+        <img src="p21.jpg" alt="Rainbow">
+        <div>
+          <h3>Rainbow</h3>
+          <p>price：$168.00</p>
+          <button onclick="adding('Rainbow')">Add to Cart</button>
+          <button onclick="removing('Rainbow')">Remove from cart</button>
+          <span id="item-quantity-Rainbow">0</span>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+
+  <h2>Shopping Cart</h2>
+  <div id="cart">
+    <ul id="cart-items"></ul>
+    <p>Total: $<span id="cart-total">0</span></p>
+  </div>
+  <button id="next-button" onclick="goToCart()">Next</button>
+
+  <script>
+  
+    var cartItems = {};
+    var cartTotal = 0;
+    
+    function windowing(){
+      if (Object.keys(orderItems).length===0){
+        window.alert("Welcome to Serenade Fusion Cuisine")
+      }
+    }
+    function adding(itemName){
+      if (Object.keys(orderItems).length!==0){
+        increaseQuantity(itemName);
+      }else{
+        addToCart(itemName);
+      }
+      window.alert("adding successfully!")
+    }
+    
+    function removing(itemName){
+      if (Object.keys(orderItems).length!==0){
+        decreaseQuantity(itemName);
+      }else{
+        removeFromCart(itemName);
+      }
+    }
+    function increaseQuantity(itemName) {
+      var price = getPriceOfItem(itemName);
+
+      if (orderItems[itemName]) {
+        orderItems[itemName]++;
+      } else {
+        orderItems[itemName] = 1;
+      }
+      totalPrice += price;
+      displayOrderItems();
+      updateQuantityDisplay(itemName, orderItems[itemName]);
+    }
+
+    function decreaseQuantity(itemName) {
+      var quantityElement = document.getElementById('item-quantity-' + itemName);
+      if (orderItems[itemName]) {
+        window.alert("Successfully cancelled");
+        var quantity = orderItems[itemName];
+        var price = getPriceOfItem(itemName);
+        orderItems[itemName]--;
+        totalPrice -= price;
+        updateQuantityDisplay(itemName, orderItems[itemName]);
+        if (orderItems[itemName] === 0) {
+          delete orderItems[itemName];
+          quantityElement.innerText =0
+        }
+        displayOrderItems();
+      }
+    }
+
+    function addToCart(itemName) {
+      var price = getPriceOfItem(itemName);
+
+      if (cartItems[itemName]) {
+        cartItems[itemName]++;
+      } else {
+        cartItems[itemName] = 1;
+      }
+      cartTotal += price;
+      updateCart();
+      updateQuantityDisplay(itemName, cartItems[itemName]);
+    }
+
+    function removeFromCart(itemName) {
+      var quantityElement = document.getElementById('item-quantity-' + itemName);
+      if (cartItems[itemName]) {
+        var price = getPriceOfItem(itemName);
+        window.alert("Successfully cancelled")
+        cartItems[itemName]--;
+        cartTotal -= price;
+        updateQuantityDisplay(itemName, cartItems[itemName]);
+        if (cartItems[itemName] === 0) {
+          
+          delete cartItems[itemName];
+          quantityElement.innerText =0
+        }
+        updateCart();
+        
+      }
+    }
+    
+    function updateQuantityDisplay(itemName, quantity) {
+    
+        var quantityElement = document.getElementById('item-quantity-' + itemName);
+        if (quantityElement) {
+          quantityElement.innerText = quantity;
+        }
+     }
+    
+
+    function goToCart() {
+      if (Object.keys(orderItems).length===0){
+        localStorage.setItem('orderItems', JSON.stringify(cartItems));
+        localStorage.setItem('totalPrice', cartTotal.toFixed(2));
+      }else{
+        localStorage.setItem('orderItems', JSON.stringify(orderItems));
+        localStorage.setItem('totalPrice', totalPrice.toFixed(2));
+      }
+      window.location.href = 'Cart.html';
+    }
+
+    function getPriceOfItem(itemName) {
+      if (itemName === 'Signature Baked Pork Chop with Fresh Tomato Rice') {
+        return 80.00;
+      } else if (itemName === 'Baked Curry Chicken with Potato Rice') {
+        return 85.50;
+      } else if (itemName === 'Stir-fried Beef Ho Fun'){
+        return 81.75;
+      } else if (itemName === 'Swiss Chicken Wing with Doll Noodle Set Meal'){
+        return 70.50;
+      } else if (itemName === 'Crispy Fried Chicken Thigh with French Fries'){
+        return 52.00;
+      } else if (itemName === 'Pan-fried Onion Pork Chop with Ham'){
+        return 79.00;
+      } else if (itemName === 'Baked Seafood Rice with Cheese'){
+        return 83.00;
+      } else if (itemName === 'Curry Beef Brisket Rice'){
+        return 71.00;
+      } else if (itemName === 'Indonesian Fried Rice'){
+        return 81.00;
+      } else if (itemName === 'Black Pepper Beef Stir-fried Spaghetti'){
+        return 79.00;
+      } else if (itemName === 'Spinach Juice Baked Fish Fillet Rice'){
+        return 80.00;
+      } else if (itemName === 'Smoked Salmon Caesar Salad'){
+        return 82.00;
+      } else if (itemName === 'Milk Tea'){
+        return 20.00;
+      } else if (itemName === 'Coffee'){
+        return 20.00;
+      } else if (itemName === 'Chocolate'){
+        return 20.00;
+      } else if (itemName === 'Lemon Tea'){
+        return 20.00;
+      } else if (itemName === 'Lemonade'){
+        return 20.00;
+      } else if (itemName === 'Whispering Jade'){
+        return 45.00;
+      } else if (itemName === 'Colourful Tropics'){
+        return 40.00;
+      } else if (itemName === 'God Father'){
+        return 168.00;
+      } else if (itemName === 'Rainbow'){
+        return 168.00;
+      } else {
+        return 0;
+      }
+    }
+
+    function updateCart() {
+      var cartItemsElement = document.getElementById('cart-items');
+      var cartTotalElement = document.getElementById('cart-total');
+
+      
+      cartItemsElement.innerHTML = '';
+
+      
+      for (var itemName in cartItems) {
+        var quantity = cartItems[itemName];
+        var price = getPriceOfItem(itemName);
+        var listItem = document.createElement('li');
+
+        listItem.innerHTML = `
+          <div class="cart-item">
+            <h3>${itemName}</h3>
+            <p>quantity: ${quantity}</p>
+          </div>
+        `;
+        cartItemsElement.appendChild(listItem);
+      }
+      cartTotalElement.innerText = cartTotal.toFixed(2);
+    }
+
+    updateCart();
+    var orderItems = JSON.parse(localStorage.getItem('orderItems')) || {};
+    var totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
+    function displayOrderItems() {
+      var cartItemsElement = document.getElementById('cart-items');
+      var cartTotalElement = document.getElementById('cart-total');
+      cartItemsElement.innerHTML = '';
+      for (var itemName in orderItems) {
+        updateQuantityDisplay(itemName, orderItems[itemName]);
+        var quantity = orderItems[itemName];
+        var price = getPriceOfItem(itemName);
+        var listItem = document.createElement('div');
+        listItem.innerHTML = `
+          <div class="cart-item">
+            <h3>${itemName}</h3>
+            <p>quantity: ${quantity}</p>
+          </div>
+        `;
+        cartItemsElement.appendChild(listItem);
+      }
+      cartTotalElement.innerText = totalPrice.toFixed(2);
+    }
+
+    
+    windowing()
+    displayOrderItems();
+    
+  </script>
+</body>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ordering system - checkout page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff5cc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f8f8f8;
+    }
+    #back-button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #56ab2f;
+      color: white;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
+    }
+
+    #back-button:hover {
+      background: #347318;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <h1>Ordering system - checkout page</h1>
+  
+  <h2>Order overview</h2>
+  <table id="order-summary">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+  
+  <h2>Total</h2>
+  <p>Total: $<span id="cart-total">0</span></p>
+  
+  <button id="back-button" onclick="placeOrder()">Complete</button>
+  <script>
+    window.alert("Here's your bill.")
+    function placeOrder() {
+      localStorage.removeItem('orderItems');
+      localStorage.removeItem('totalPrice');
+      window.alert("Thank you for using!")
+      window.location.href = 'Index.html';
+    }
+    
+    var orderItems = JSON.parse(localStorage.getItem('orderItems')) || {};
+    var totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+    var orderSummaryTableBody = document.getElementById('order-summary').getElementsByTagName('tbody')[0];
+    var cartTotalElement = document.getElementById('cart-total');
+    
+    
+    for (var itemName in orderItems) {
+      var quantity = orderItems[itemName];
+      var price = getPriceOfItem(itemName);
+      var row = orderSummaryTableBody.insertRow();
+      var cellItem = row.insertCell(0);
+      var cellQuantity = row.insertCell(1);
+      var cellPrice = row.insertCell(2);
+      cellItem.innerHTML = itemName;
+      cellQuantity.innerHTML = quantity;
+      cellPrice.innerHTML = '$' + (quantity * price).toFixed(2);
+    }
+    cartTotalElement.innerText = totalPrice.toFixed(2);
+
+    function getPriceOfItem(itemName) {
+      if (itemName === 'Signature Baked Pork Chop with Fresh Tomato Rice') {
+        return 80.00;
+      } else if (itemName === 'Baked Curry Chicken with Potato Rice') {
+        return 85.50;
+      } else if (itemName === 'Stir-fried Beef Ho Fun'){
+        return 81.75;
+      } else if (itemName === 'Swiss Chicken Wing with Doll Noodle Set Meal'){
+        return 70.50;
+      } else if (itemName === 'Crispy Fried Chicken Thigh with French Fries'){
+        return 52.00;
+      } else if (itemName === 'Pan-fried Onion Pork Chop with Ham'){
+        return 79.00;
+      } else if (itemName === 'Baked Seafood Rice with Cheese'){
+        return 83.00;
+      } else if (itemName === 'Curry Beef Brisket Rice'){
+        return 71.00;
+      } else if (itemName === 'Indonesian Fried Rice'){
+        return 81.00;
+      } else if (itemName === 'Black Pepper Beef Stir-fried Spaghetti'){
+        return 79.00;
+      } else if (itemName === 'Spinach Juice Baked Fish Fillet Rice'){
+        return 80.00;
+      } else if (itemName === 'Smoked Salmon Caesar Salad'){
+        return 82.00;
+      } else if (itemName === 'Milk Tea'){
+        return 20.00;
+      } else if (itemName === 'Coffee'){
+        return 20.00;
+      } else if (itemName === 'Chocolate'){
+        return 20.00;
+      } else if (itemName === 'Lemon Tea'){
+        return 20.00;
+      } else if (itemName === 'Lemonade'){
+        return 20.00;
+      } else if (itemName === 'Whispering Jade'){
+        return 45.00;
+      } else if (itemName === 'Colourful Tropics'){
+        return 40.00;
+      } else if (itemName === 'God Father'){
+        return 168.00;
+      } else if (itemName === 'Rainbow'){
+        return 168.00;
+      } else {
+        return 0;
+      }
+    }
+
+    displayOrderItems();
+  </script>
+</body>
+</html>
